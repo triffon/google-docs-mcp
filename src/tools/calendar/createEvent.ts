@@ -3,7 +3,7 @@ import { UserError } from 'fastmcp';
 import { z } from 'zod';
 import { randomUUID } from 'node:crypto';
 import { getCalendarClient } from '../../clients.js';
-import { eventDateTimeSchema } from './helpers.js';
+import { createEventDateTimeSchema } from './helpers.js';
 
 export function register(server: FastMCP) {
   server.addTool({
@@ -19,8 +19,8 @@ export function register(server: FastMCP) {
       summary: z.string().describe('Event title.'),
       description: z.string().optional().describe('Event description / notes.'),
       location: z.string().optional().describe('Physical address or location string.'),
-      start: eventDateTimeSchema.describe('Event start. Provide dateTime or date.'),
-      end: eventDateTimeSchema.describe(
+      start: createEventDateTimeSchema().describe('Event start. Provide dateTime or date.'),
+      end: createEventDateTimeSchema().describe(
         'Event end. Provide dateTime or date. For all-day events, end.date is exclusive.'
       ),
       attendees: z

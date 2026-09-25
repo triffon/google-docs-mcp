@@ -3,7 +3,7 @@ import { UserError } from 'fastmcp';
 import { z } from 'zod';
 import { calendar_v3 } from 'googleapis';
 import { getCalendarClient } from '../../clients.js';
-import { eventDateTimeSchema } from './helpers.js';
+import { createEventDateTimeSchema } from './helpers.js';
 
 export function register(server: FastMCP) {
   server.addTool({
@@ -20,8 +20,8 @@ export function register(server: FastMCP) {
       summary: z.string().optional().describe('New event title.'),
       description: z.string().optional().describe('New event description.'),
       location: z.string().optional().describe('New location.'),
-      start: eventDateTimeSchema.optional().describe('New start time.'),
-      end: eventDateTimeSchema.optional().describe('New end time.'),
+      start: createEventDateTimeSchema().optional().describe('New start time.'),
+      end: createEventDateTimeSchema().optional().describe('New end time.'),
       attendees: z
         .array(
           z.strictObject({

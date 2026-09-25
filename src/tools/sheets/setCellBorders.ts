@@ -14,7 +14,7 @@ const borderStyleEnum = z.enum([
   'NONE',
 ]);
 
-const borderSchema = z
+const createBorderSchema = () => z
   .object({
     style: borderStyleEnum.describe('Border line style.'),
     color: z
@@ -37,12 +37,12 @@ export function register(server: FastMCP) {
             'The spreadsheet ID — the long string between /d/ and /edit in a Google Sheets URL.'
           ),
         range: z.string().describe('A1 notation range (e.g., "Sheet1!A1:D10", "1:1", "A:A").'),
-        top: borderSchema.describe('Top border of the range.'),
-        bottom: borderSchema.describe('Bottom border of the range.'),
-        left: borderSchema.describe('Left border of the range.'),
-        right: borderSchema.describe('Right border of the range.'),
-        innerHorizontal: borderSchema.describe('Horizontal borders between rows inside the range.'),
-        innerVertical: borderSchema.describe('Vertical borders between columns inside the range.'),
+        top: createBorderSchema().describe('Top border of the range.'),
+        bottom: createBorderSchema().describe('Bottom border of the range.'),
+        left: createBorderSchema().describe('Left border of the range.'),
+        right: createBorderSchema().describe('Right border of the range.'),
+        innerHorizontal: createBorderSchema().describe('Horizontal borders between rows inside the range.'),
+        innerVertical: createBorderSchema().describe('Vertical borders between columns inside the range.'),
       })
       .refine(
         (d) =>

@@ -1,6 +1,6 @@
 {
-  "name": "@a-bonus/google-docs-mcp",
-  "version": "1.11.3",
+  "name": "@triffon/google-docs-mcp",
+  "version": "1.11.3-triffon",
   "type": "module",
   "bin": {
     "google-docs-mcp": "dist/index.js"

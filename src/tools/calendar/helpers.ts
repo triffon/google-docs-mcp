@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const eventDateTimeSchema = z
+export const createEventDateTimeSchema = () =>z
   .object({
     dateTime: z
       .string()

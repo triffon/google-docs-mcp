@@ -7,7 +7,7 @@ import { getTableById } from '../structureHelpers.js';
 import * as GDocsHelpers from '../../../googleDocsApiHelpers.js';
 import { TABLE_INDEX_BODY_FIELDS, buildDocumentGetFields } from '../tabFieldMasks.js';
 
-const BorderSideSchema = z.strictObject({
+const createBorderSideSchema = () => z.strictObject({
   color: z
     .string()
     .refine(validateHexColor, { message: 'Invalid hex color format (e.g., #000000).' })
@@ -27,10 +27,10 @@ export function register(server: FastMCP) {
       rowEnd: z.number().int().min(0).describe('Zero-based ending row index (inclusive).'),
       columnStart: z.number().int().min(0).describe('Zero-based starting column index.'),
       columnEnd: z.number().int().min(0).describe('Zero-based ending column index (inclusive).'),
-      top: BorderSideSchema.optional(),
-      bottom: BorderSideSchema.optional(),
-      left: BorderSideSchema.optional(),
-      right: BorderSideSchema.optional(),
+      top: createBorderSideSchema().optional(),
+      bottom: createBorderSideSchema().optional(),
+      left: createBorderSideSchema().optional(),
+      right: createBorderSideSchema().optional(),
       tabId: z.string().optional().describe('Optional target tab ID.'),
     })
       .refine((data) => data.rowEnd >= data.rowStart, {
